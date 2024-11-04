@@ -23,27 +23,50 @@ document.addEventListener("DOMContentLoaded", function () {
             ctx.strokeStyle = "black";
             ctx.lineWidth = 2;
             ctx.beginPath();
+
+            //new code here
             ctx.moveTo(this.x, this.y - this.height / 2);
             ctx.lineTo(this.x, this.y, + this.height / 2);
             ctx.moveTo(this.x - this.width / 2, this.y);
             ctx.lineTo(this.x + this.width / 2, this.y);
             ctx.stroke()
+
+            //new code ended
         }
     };
+
     class Balloon {
+        //editing THIS to make random colour balloons.
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = canvas.height;
             this.radius = 20;
             this.speed = Math.random() * 2 + 1;
+
+            //new code here!
+            //creating an array to store the new balloon images.
+            const balloonImages = [
+                "assets/red-balloon.png",
+                "assets/pink-balloon.png",
+                "assets/blue-balloon.png",
+                "assets/yellow-balloon.png"
+            ];
+
+            //now to randomly select an image from this array.
+            //this helped a lot. https://stackoverflow.com/questions/14004318/show-random-image-from-array-in-javascript
+
+            const getRandomBalloon = Math.floor(Math.random() * balloonImages.length); //floor makes it a whole number, random picks a random number that corresponds to an item in the array.
+            this.image = new Image();
+            //makes the source correspond to an item in the array.
+            this.image.src = balloonImages[getRandomBalloon];
         }
         update() {
             this.y -= this.speed;
         }
     
         draw() {
-            ctx.drawImage (
-                balloonImage,
+            ctx.drawImage(
+                this.image,
                 this.x - this.radius,
                 this.y - this.radius,
                 this.radius * 2,
@@ -124,8 +147,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     //start scene
     function drawStartScreen() {
+
         ctx.clearRect(0,0, canvas.width, canvas.height);
 
+        //new gradient here
+        //code from https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
+        const gradient = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, canvas.width / 2)
+        gradient.addColorStop(0, "lightgreen")
+        gradient.addColorStop(1, "green")
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        //unmodified code below
         ctx.fillStyle = "black";
         ctx.font = "30px Arial";
         const instruction = "Shoot as many balloons as you can.";

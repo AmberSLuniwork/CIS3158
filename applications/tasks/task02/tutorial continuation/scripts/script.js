@@ -5,7 +5,9 @@ class PhaserTutorialSessionTwo extends Phaser.Scene{
         super();
         //class variables here
         this.player = null;
-        this.cursors = null;
+        //don't need cursor variable if i'm not using it.
+        //this.cursors = null;
+        this.pointer = null;
 
     }
 
@@ -48,24 +50,19 @@ class PhaserTutorialSessionTwo extends Phaser.Scene{
             frameRate:10,
             repeat: -1,
         })
-
-        this.cursors = this.input.keyboard.createCursorKeys();
+        //Don't need this if I'm using a pointer.
+        //this.cursors = this.input.keyboard.createCursorKeys();
     }
 
     update() {
-        if (this.cursors.left.isDown) {
-            this.player.setVelocityX(-160);
-            this.player.anims.play('left', true);
-        } 
-        else if (this.cursors.right.isDown) {
-            this.player.setVelocityX(160);
-            this.player.anims.play('right', true);
-        }
-        else if(this.cursors.down.isDown) {
-            this.player.setVelocityY(160);
-            this.player.anims.play('turn');
-        }
-        else if(this.cursors.up.isDown) {
+        this.pointer = this.input.activePointer;
+        //sprite follows mouse now!
+        this.player.x = this.pointer.x;
+
+        //not sure how to make animations work with following mouse.
+
+        //change from up/space to a mouse click to jump. Not sure why, but it didn't like leftButton. Have left it as pointer so I at least have something to show for it.
+        if(this.pointer.isDown) {
             this.player.setVelocityY(-160);
             this.player.anims.play('turn');
         }
