@@ -8,7 +8,7 @@ class CourseworkTwo extends Phaser.Scene {
     //functions
     preload()
     {
-        this.load.spritesheet('player', './assets/player-spritesheet.png', {frameWidth:30, frameHeight:45});
+        this.load.spritesheet('player', './assets/sprites/player-spritesheet.png', {frameWidth:30, frameHeight:45});
     }
 
     create(){
