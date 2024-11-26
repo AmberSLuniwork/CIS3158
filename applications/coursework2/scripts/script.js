@@ -8,8 +8,7 @@ class CourseworkTwo extends Phaser.Scene {
     //functions
     preload()
     {
-        this.load.spritesheet('player', './assets/player-spritesheet.png', {frameWidth:30, frameHeight:45});
-        this.load.image('raindrop', './assets/raindrop.png');
+        this.load.spritesheet('player', './assets/sprites/player-spritesheet.png', {frameWidth:30, frameHeight:45});
     }
 
     create(){
@@ -37,10 +36,6 @@ class CourseworkTwo extends Phaser.Scene {
             frameRate:4,
             repeat:-1, 
         });
-
-        //rain
-
-
         this.cursors = this.input.keyboard.createCursorKeys();
     }
 
@@ -51,7 +46,7 @@ class CourseworkTwo extends Phaser.Scene {
         this.player.setFlipX(true);
         this.player.setVelocityX(-250);
         this.player.anims.play('run', true);
-        //run right
+    //run right
         } else if (this.cursors.right.isDown && this.cursors.shift.isDown) {
         this.player.setFlipX(false);
         this.player.setVelocityX(250);
@@ -67,7 +62,7 @@ class CourseworkTwo extends Phaser.Scene {
             this.player.setVelocityX(150);
             this.player.anims.play('walk', true);
         }
-        //no keys down
+    //no keys down
         else {
             this.player.setVelocityX(0);
             this.player.setVelocityY(240);
@@ -75,6 +70,7 @@ class CourseworkTwo extends Phaser.Scene {
         }
     }
 }
+
 //config
 
 const config = {
