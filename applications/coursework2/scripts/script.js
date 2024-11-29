@@ -41,7 +41,7 @@ class CourseworkTwo extends Phaser.Scene {
 
         const particles = this.add.particles('raindrop');
         const emitter = particles.createEmitter({
-            x: {min: 0, max:800}, //so it's across the whole screen.
+            x: {min: 0, max: this.cameras.main.width}, //so it's across the whole screen.
             y: 0, //i should hope that all rain comes from the sky!
             speedY: Phaser.Math.FloatBetween(1000, 1500),
             speedX: -100,
@@ -93,7 +93,7 @@ class CourseworkTwo extends Phaser.Scene {
 
 const config = {
     type:Phaser.AUTO,
-    width:800,
+    width:900,
     height:600,
     backgroundColor: '#e6e6e6',
     parent: 'game-container',
