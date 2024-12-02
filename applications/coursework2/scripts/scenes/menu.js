@@ -15,13 +15,21 @@ export default class menuScene extends Phaser.Scene{
         //main music
         this.menuMusic = this.sound.add('menumusic', {
             loop: true, 
-            volume: 0.2});
+            volume: 0.2,
+            seek: 2
+        });
         this.menuMusic.play();
         //ambiance
         this.busAmbiance = this.sound.add('busambiance', {
             loop: true, 
-            volume: 0.3});
+            volume: 0.3
+        });
         this.busAmbiance.play();
+        this.stormAmbiance = this.sound.add('stormambiance', {
+            loop: true, 
+            volume: 0.2
+        });
+        this.stormAmbiance.play();
         //i found out how to use functions! no more swathes of code for me :D 
         this.createMenu();
         //text
@@ -34,15 +42,15 @@ export default class menuScene extends Phaser.Scene{
     //makes the actual menu.
     createMenu() {
         // Menu text elements
-        this.playText = this.add.text(30, 50, 'PLAY', { 
+        this.playText = this.add.text(30, 30, 'PLAY', { 
             fill: '#ffffff', fontSize: '32px', resolution: 2 
         }).setInteractive();
 
-        this.optionsText = this.add.text(30, 125, 'OPTIONS', { 
+        this.optionsText = this.add.text(30, 105, 'OPTIONS', { 
             fill: '#ffffff', fontSize: '32px', resolution: 2 
         }).setInteractive();
 
-        this.creditsText = this.add.text(30, 200, 'CREDITS', { 
+        this.creditsText = this.add.text(30, 180, 'CREDITS', { 
             fill: '#ffffff', fontSize: '32px', resolution: 2 
         }).setInteractive();
 
@@ -64,8 +72,9 @@ export default class menuScene extends Phaser.Scene{
         this.playText.on('pointerdown', () => {
             this.busAmbiance.stop();
             this.menuMusic.stop();
+            this.stormAmbiance.stop();
             this.sound.play('menuselect', { volume: 0.3 });
-            this.scene.start('introScene'); // this starts the ame!
+            this.scene.start('outsideScene'); // this starts the ame!
         });
 
         //OPTIONS button
@@ -113,7 +122,7 @@ export default class menuScene extends Phaser.Scene{
         this.darken = this.add.rectangle(400, 300, 800, 600, 0x000000, 0.7);
 
         //back button!
-        this.backText = this.add.text(30, 50, 'BACK', { 
+        this.backText = this.add.text(30, 30, 'BACK', { 
             fill: '#ffffff', fontSize: '32px', resolution: 2 
         }).setInteractive();
         this.backText.on('pointerover', () => {
@@ -130,21 +139,21 @@ export default class menuScene extends Phaser.Scene{
 
         //actual credits content here
         //need to format the lists weirdly otherwise the indentations go funky
-        this.creditsTextContent = this.add.text(100, 100, 
-`Music:
-    Menu music - 
+        this.creditsTextContent = this.add.text(75, 75, 
+`Music
+    Menu
         Signal To Noise
         Composer: Scott Buckley
         Website: https://youtube.com/user/musicbyscottb
         License: Free To Use YouTube license
         Music powered by BreakingCopyright
-
-Effects:
-    Bus ambiance - 
+        \n
+Effects
+    Bus ambiance | Thunderstorm
         Sound Effect by freesound_community from Pixabay
-
-Sound effects:
-    Menu selection & hovers - 
+        \n
+Sound effects
+    Menu selection & hovers
         Driken Stan from Pixabay`, 
             { 
                 fill: '#ffffff', 

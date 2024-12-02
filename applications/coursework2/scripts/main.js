@@ -1,5 +1,5 @@
 import menuScene from './scenes/menu.js';
-import introScene from './scenes/intro.js';
+import outsideScene from './scenes/outside.js';
 
 class loadScene extends Phaser.Scene {
     constructor() {
@@ -58,6 +58,7 @@ class loadScene extends Phaser.Scene {
         this.load.audio('menuhover','./assets/soundeffects/retro-select-236670.mp3')
         this.load.audio('menuselect','./assets/soundeffects/retro-blip-236676.mp3')
         this.load.audio('busambiance', './assets/environments/bus-interior-22321.mp3')
+        this.load.audio('stormambiance','./assets/environments/thunderstorm-with-heavy-rain1wav-14586.mp3')
 
         //sprites
         this.load.spritesheet('player', './assets/sprites/player-spritesheet.png', {frameWidth:30, frameHeight:45});
@@ -87,7 +88,7 @@ const config = {
     scene: [
         loadScene,
         menuScene,
-        introScene,
+        outsideScene,
     ],
     physics: {
         default: 'arcade',

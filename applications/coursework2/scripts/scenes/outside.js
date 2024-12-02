@@ -1,6 +1,7 @@
-export default class introScene extends Phaser.Scene {
+export default class outsideScene extends Phaser.Scene {
     constructor() {
-        super('introScene');
+        //you need the super for imports! name it well!
+        super('outsideScene');
         //class variables
         this.player;
         this.cursors;
@@ -12,6 +13,13 @@ export default class introScene extends Phaser.Scene {
     }
 
     create(){
+
+        this.stormAmbiance = this.sound.add('stormambiance', {
+            loop: true, 
+            volume: 0.4,
+            seek: 3 // so the track plays three seconds in - no weird start up noise.
+        });
+        this.stormAmbiance.play();
 
         //toggle menu on esc key!
         this.input.keyboard.on('keydown-ESC', () => {
