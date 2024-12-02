@@ -12,7 +12,7 @@ export default class introScene extends Phaser.Scene {
     }
 
     create(){
-        
+
         //toggle menu on esc key!
         this.input.keyboard.on('keydown-ESC', () => {
             if (this.gameMenuContainer) {
@@ -24,14 +24,16 @@ export default class introScene extends Phaser.Scene {
             }
         });
 
+        this.makeBackground();
+
         //spritesheet
         this.player = this.physics.add.sprite(100, 200, 'player').setScale(2);
         this.player.setCollideWorldBounds(false);
         this.player.setGravityY(400)
 
         //camera for player
-        this.cameras.main.setSize(900, 600);
-        this.cameras.main.setBounds(0, 0, 1200, screen.height);
+        this.cameras.main.setSize(800, 600);
+        this.cameras.main.setBounds(0, 0, 1500, screen.height);
         this.cameras.main.startFollow(this.player, false, 0.1, 0)
 
         //animations
@@ -62,20 +64,20 @@ export default class introScene extends Phaser.Scene {
             y: 0, //i should hope that all rain comes from the sky!
             speedY: Phaser.Math.FloatBetween(1500, 2000),
             speedX: -100,
-            lifespan: 1000, //this is in milliseconds.
+            lifespan: 250, //this is in milliseconds.
             quantity: 4,
             alpha: {
-                start: 0.9,
-                end: 0.1,
+                start: 0.8,
+                end: 0.5,
             },
             depth: Phaser.Math.FloatBetween(1, 3)
         });
         emitter.setScaleY(Phaser.Math.FloatBetween(4, 6))
 
-        //actual environment!
-        this.pavement = this.add.tileSprite(400, 500, 900, 33, 'pavement').setScale(2);
-        const pavementBody = this.physics.add.staticImage(this.scale.width/2, 500, null);
-        pavementBody.setSize(screen.width,66)
+        //floor!
+        this.pavement = this.add.tileSprite(400, 460, screen.width, 33, 'pavement').setScale(2);
+        const pavementBody = this.physics.add.staticImage(this.scale.width/2, this.pavement.y, null);
+        pavementBody.setSize(screen.width * 2, 66)
 
         //collisions
         //player with floor
@@ -86,6 +88,18 @@ export default class introScene extends Phaser.Scene {
         //movin lon stuff out of the update method to make this easier on my eyes.
         //player movement call
         this.movePlayer()
+
+        //so they don't become trapped in the void! If I'm dumb enouh to, so are they!
+        if (this.player.y > 800){
+            this.player.y = 200
+            console.log('oops! you fell out of the world!')
+        }
+
+        //cloud parallax!
+        const cameraX = this.cameras.main.scrollX;
+        this.cloudsBig.tilePositionX = cameraX * 0.05;
+        this.cloudsMed.tilePositionX = cameraX * 0.1;
+        this.cloudsSmall.tilePositionX = cameraX * 0.25;
         
     }
 
@@ -120,6 +134,7 @@ export default class introScene extends Phaser.Scene {
             }
     }
 
+    //menu stuffs
     createGameMenu() {
 
         //stops multiple menus bein created when the esc key is pressed.
@@ -132,7 +147,8 @@ export default class introScene extends Phaser.Scene {
         const menuText = this.add.text(30, 50, 'PAUSED', { 
             fontSize: '48px', 
             fill: '#ffffff', 
-            fontStyle: 'bold' 
+            fontStyle: 'bold'
+            
         });
 
         // Back to Main Menu button
@@ -185,7 +201,6 @@ export default class introScene extends Phaser.Scene {
             if (child.anims) child.anims.pause();
         });
     }
-
     destroyGameMenu() {
         // Destroy all menu elements
         if (this.gameMenuContainer) {
@@ -198,5 +213,15 @@ export default class introScene extends Phaser.Scene {
                 if (child.anims) child.anims.resume();
             });
         }
+    }
+
+    //backround
+    makeBackground(){
+        //background image
+        this.background = this.add.tileSprite(0, 0, this.cameras.main.width , this.cameras.main.height, 'bg').setScale(2).setOrigin(0);
+
+        this.cloudsBig = this.add.tileSprite(0, -90, this.cameras.main.width * 2, this.cameras.main.height, 'clouds3').setOrigin(0);
+        this.cloudsMed = this.add.tileSprite(0, -100, this.cameras.main.width * 2, this.cameras.main.height, 'clouds2').setOrigin(0);
+        this.cloudsSmall = this.add.tileSprite(0, -90, this.cameras.main.width * 2, this.cameras.main.height, 'clouds1').setOrigin(0);
     }
 }

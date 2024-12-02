@@ -25,11 +25,10 @@ export default class menuScene extends Phaser.Scene{
         //i found out how to use functions! no more swathes of code for me :D 
         this.createMenu();
         //text
-        this.add.text(30,575,'Produced as coursework for CIS3158', {fill: '#ffffff', fontSize: '16px'});
+        this.add.text(30,575,'Produced as coursework for CIS3158', {fill: '#ffffff', fontSize: '16px' });
     }
 
     update(){
-
     }
 
     //makes the actual menu.
@@ -132,18 +131,21 @@ export default class menuScene extends Phaser.Scene{
         //actual credits content here
         //need to format the lists weirdly otherwise the indentations go funky
         this.creditsTextContent = this.add.text(100, 100, 
-            `Menu music:
-    Signal To Noise
-    Composer: Scott Buckley
-    Website: https://youtube.com/user/musicbyscottb
-    License: Free To Use YouTube license
-    Music powered by BreakingCopyright
+`Music:
+    Menu music - 
+        Signal To Noise
+        Composer: Scott Buckley
+        Website: https://youtube.com/user/musicbyscottb
+        License: Free To Use YouTube license
+        Music powered by BreakingCopyright
 
-Bus ambiance:        
-    Sound Effect by freesound_community from Pixabay
+Effects:
+    Bus ambiance - 
+        Sound Effect by freesound_community from Pixabay
 
-Menu sound effects:
-    Driken Stan from Pixabay`, 
+Sound effects:
+    Menu selection & hovers - 
+        Driken Stan from Pixabay`, 
             { 
                 fill: '#ffffff', 
                 fontSize: '18px', 

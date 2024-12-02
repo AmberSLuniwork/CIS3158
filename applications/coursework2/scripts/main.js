@@ -1,4 +1,3 @@
-
 import menuScene from './scenes/menu.js';
 import introScene from './scenes/intro.js';
 
@@ -23,11 +22,13 @@ class loadScene extends Phaser.Scene {
         progressBox.fillRect(centerX - barWidth / 2, centerY - barHeight / 2, barWidth, barHeight);
 
         const loadingText = this.add.text(centerX, centerY - 50, 'Loading...', {
-            fill: '#ffffff',
+            fill: '#ffffff', 
+            fontSize: '28px',
         }).setOrigin(0.5);
 
         const percentText = this.add.text(centerX, centerY, '0%', {
             fill: '#ffffff',
+            fontSize: '28px',
         }).setOrigin(0.5);
 
         // Update the loading bar and percentage text during loading
@@ -50,7 +51,7 @@ class loadScene extends Phaser.Scene {
         //so i have found that if the assets are loaded in one scene, i don't have to load them in the next.
         //therefore...
         //ALL OF THE ASSETS!!!
-        //side note: could i store these in a json file instead?
+        //side note: could i store these in a json file instead? could be nice to reduce processin times.
 
         //audio
         this.load.audio('menumusic','./assets/music/Signal-To-Noise.mp3')
@@ -61,10 +62,17 @@ class loadScene extends Phaser.Scene {
         //sprites
         this.load.spritesheet('player', './assets/sprites/player-spritesheet.png', {frameWidth:30, frameHeight:45});
 
-        //imaes
-        this.load.image('menubg', './assets/environments/main-menu-cover.png')
+        //images
         this.load.image('raindrop', './assets/particles/raindrop.png')
+
+        this.load.image('menubg', './assets/environments/main-menu-cover.png')
         this.load.image('pavement', './assets/environments/pavement.png')
+        this.load.image('bg', './assets/environments/background.png')
+
+        //clouds
+        this.load.image('clouds1', './assets/environments/clouds-1.png')
+        this.load.image('clouds2', './assets/environments/clouds-2.png')
+        this.load.image('clouds3', './assets/environments/clouds-3.png')
     }
 }
 
