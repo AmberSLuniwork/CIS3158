@@ -78,7 +78,7 @@ export default class outsideScene extends Phaser.Scene {
                 start: 0.8,
                 end: 0.5,
             },
-            depth: Phaser.Math.FloatBetween(1, 3)
+            setDepth: 2,
         });
         emitter.setScaleY(Phaser.Math.FloatBetween(4, 6))
 
@@ -200,7 +200,7 @@ export default class outsideScene extends Phaser.Scene {
         });
 
         // Group menu elements
-        this.gameMenuContainer = this.add.container(0, 0, [background, menuText, mainMenuButton, resumeButton]);
+        this.gameMenuContainer = this.add.container(0, 0, [background, menuText, mainMenuButton, resumeButton]).setDepth(20);
         this.gameMenuContainer.setPosition(this.cameras.main.scrollX, this.cameras.main.scrollY);
 
         // Pause game physics and animations
@@ -228,8 +228,8 @@ export default class outsideScene extends Phaser.Scene {
         //background image
         this.background = this.add.tileSprite(0, 0, this.cameras.main.width , this.cameras.main.height, 'bg').setScale(2).setOrigin(0);
 
-        this.cloudsBig = this.add.tileSprite(0, -90, this.cameras.main.width * 2, this.cameras.main.height, 'clouds3').setOrigin(0);
-        this.cloudsMed = this.add.tileSprite(0, -100, this.cameras.main.width * 2, this.cameras.main.height, 'clouds2').setOrigin(0);
-        this.cloudsSmall = this.add.tileSprite(0, -90, this.cameras.main.width * 2, this.cameras.main.height, 'clouds1').setOrigin(0);
+        this.cloudsBig = this.add.tileSprite(0, -90, this.cameras.main.width * 2, this.cameras.main.height, 'clouds3').setOrigin(0).setDepth(1);
+        this.cloudsMed = this.add.tileSprite(0, -100, this.cameras.main.width * 2, this.cameras.main.height, 'clouds2').setOrigin(0).setDepth(3);
+        this.cloudsSmall = this.add.tileSprite(0, -90, this.cameras.main.width * 2, this.cameras.main.height, 'clouds1').setOrigin(0).setDepth(4);
     }
 }
