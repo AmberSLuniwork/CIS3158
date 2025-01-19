@@ -239,7 +239,7 @@ export default class outsideScene extends Phaser.Scene {
         });
 
         // Group menu elements
-        this.gameMenuContainer = this.add.container(0, 0, [background, menuText, mainMenuButton, resumeButton]);
+        this.gameMenuContainer = this.add.container(0, 0, [background, menuText, mainMenuButton, resumeButton]).setDepth(20);
         this.gameMenuContainer.setPosition(this.cameras.main.scrollX, this.cameras.main.scrollY);
 
         // Pause game physics and animations
