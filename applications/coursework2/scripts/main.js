@@ -1,5 +1,6 @@
 import menuScene from './scenes/menu.js';
 import outsideScene from './scenes/outside.js';
+import HUDScene from './scenes/HUD.js';
 
 class loadScene extends Phaser.Scene {
     constructor() {
@@ -60,15 +61,25 @@ class loadScene extends Phaser.Scene {
         this.load.audio('busambiance', './assets/environments/bus-interior-22321.mp3')
         this.load.audio('stormambiance','./assets/environments/thunderstorm-with-heavy-rain1wav-14586.mp3')
 
-        //sprites
-        this.load.spritesheet('player', './assets/sprites/player-spritesheet.png', {frameWidth:30, frameHeight:45});
+        //sprites / items
+        this.load.spritesheet('player', './assets/sprites/player-spritesheet.png', {frameWidth:30, frameHeight:45})
+        this.load.spritesheet('shiny','./assets/sprites/shiny-thing.png',{frameWidth:11, frameHeight:17})
+        this.load.image('coin', './assets/items/coin.png')
 
-        //images
+        //other images
         this.load.image('raindrop', './assets/particles/raindrop.png')
-
         this.load.image('menubg', './assets/environments/main-menu-cover.png')
         this.load.image('pavement', './assets/environments/pavement.png')
         this.load.image('bg', './assets/environments/background.png')
+        this.load.image('invisible', './assets/invisiblewall.png')
+        this.load.image('bench', './assets/environments/bench.png')
+        this.load.image('schoolex', './assets/environments/school-exterior.png')
+        this.load.image('schooldoor', './assets/environments/school-door.png')
+
+        //trees
+        this.load.image('tree1','./assets/environments/tree-1.png')
+        this.load.image('tree2', './assets/environments/tree-2.png')
+        this.load.image('tree3', './assets/environments/tree-3.png')
 
         //clouds
         this.load.image('clouds1', './assets/environments/clouds-1.png')
@@ -88,6 +99,7 @@ const config = {
     scene: [
         loadScene,
         menuScene,
+        HUDScene,
         outsideScene,
     ],
     physics: {

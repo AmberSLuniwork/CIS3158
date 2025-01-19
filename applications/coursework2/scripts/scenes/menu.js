@@ -46,11 +46,15 @@ export default class menuScene extends Phaser.Scene{
             fill: '#ffffff', fontSize: '32px', resolution: 2 
         }).setInteractive();
 
-        this.optionsText = this.add.text(30, 105, 'OPTIONS', { 
+        this.howtoText = this.add.text(30, 90, 'HOW TO PLAY', {
             fill: '#ffffff', fontSize: '32px', resolution: 2 
         }).setInteractive();
 
-        this.creditsText = this.add.text(30, 180, 'CREDITS', { 
+        this.optionsText = this.add.text(30, 150, 'OPTIONS', { 
+            fill: '#ffffff', fontSize: '32px', resolution: 2 
+        }).setInteractive();
+
+        this.creditsText = this.add.text(30, 210, 'CREDITS', { 
             fill: '#ffffff', fontSize: '32px', resolution: 2 
         }).setInteractive();
 
@@ -75,6 +79,21 @@ export default class menuScene extends Phaser.Scene{
             this.stormAmbiance.stop();
             this.sound.play('menuselect', { volume: 0.3 });
             this.scene.start('outsideScene'); // this starts the ame!
+        });
+
+        //HOW TO PLAY button
+        this.howtoText.on('pointerover', () => {
+            this.howtoText.setStyle({ fontStyle: 'bold' });
+            this.sound.play('menuhover', { volume: 0.3 });
+        });
+
+        this.howtoText.on('pointerout', () => {
+            this.howtoText.setStyle({ fontStyle: 'normal' });
+        });
+
+        this.howtoText.on('pointerdown', () => {
+            this.showHowTo();
+            this.sound.play('menuselect', { volume: 0.3 })
         });
 
         //OPTIONS button
@@ -108,13 +127,9 @@ export default class menuScene extends Phaser.Scene{
         });
     }
 
-    showOptions(){
-
-    }
-
-    showCredits(){
-        //remove other text
+    showHowTo(){
         this.playText.destroy();
+        this.howtoText.destroy();
         this.optionsText.destroy();
         this.creditsText.destroy();
 
@@ -134,6 +149,76 @@ export default class menuScene extends Phaser.Scene{
         });
         this.backText.on('pointerdown', () => {
             this.showMenu();
+            this.howtoTextContent.destroy();
+            this.sound.play('menuselect', { volume: 0.3 });
+        });
+
+        //content!
+        this.howtoTextContent = this.add.text(75, 75, 
+`Movement
+    To move, use the ARROW KEYS.
+    To sprint, hold SHIFT while using the ARROW KEYS
+        \n
+Interaction
+    When close enough to interact with objects, press E.
+            `, 
+                        { 
+                            fill: '#ffffff', 
+                            fontSize: '18px', 
+                        });
+
+    }
+
+    showOptions(){
+        this.playText.destroy();
+        this.howtoText.destroy();
+        this.optionsText.destroy();
+        this.creditsText.destroy();
+
+        //backround darker so can see text easier
+        this.darken = this.add.rectangle(400, 300, 800, 600, 0x000000, 0.7);
+
+        //back button!
+        this.backText = this.add.text(30, 30, 'BACK', { 
+            fill: '#ffffff', fontSize: '32px', resolution: 2 
+        }).setInteractive();
+        this.backText.on('pointerover', () => {
+            this.backText.setStyle({ fontStyle: 'bold' });
+            this.sound.play('menuhover', { volume: 0.3 });
+        });
+        this.backText.on('pointerout', () => {
+            this.backText.setStyle({fontStyle: 'normal' });
+        });
+        this.backText.on('pointerdown', () => {
+            this.showMenu();
+            this.sound.play('menuselect', { volume: 0.3 });
+        })
+    }
+
+    showCredits(){
+        //remove other text
+        this.playText.destroy();
+        this.howtoText.destroy();
+        this.optionsText.destroy();
+        this.creditsText.destroy();
+
+        //backround darker so can see text easier
+        this.darken = this.add.rectangle(400, 300, 800, 600, 0x000000, 0.7);
+
+        //back button!
+        this.backText = this.add.text(30, 30, 'BACK', { 
+            fill: '#ffffff', fontSize: '32px', resolution: 2 
+        }).setInteractive();
+        this.backText.on('pointerover', () => {
+            this.backText.setStyle({ fontStyle: 'bold' });
+            this.sound.play('menuhover', { volume: 0.3 });
+        });
+        this.backText.on('pointerout', () => {
+            this.backText.setStyle({fontStyle: 'normal' });
+        });
+        this.backText.on('pointerdown', () => {
+            this.showMenu();
+            this.creditsTextContent.destroy();
             this.sound.play('menuselect', { volume: 0.3 });
         });
 
@@ -163,7 +248,6 @@ Sound effects
 
     showMenu() {
         // Remove credits elements
-        this.creditsTextContent.destroy();
         this.backText.destroy();
         this.darken.destroy();
 
